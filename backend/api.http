@@ -1,0 +1,29 @@
+POST http://localhost:3000/assets
+Content-Type: application/json
+
+{
+  "name": "test",
+  "symbol":  "test",
+  "price": 100,
+  "image": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+}
+
+###
+GET http://localhost:3000/assets
+
+###
+GET http://localhost:3000/assets/test
+
+###
+# @name createWallet
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+###
+
+@walletId = {{ createWallet.response.body.id }}
+
+GET http://localhost:3000/wallets
+
+###
+GET http://localhost:3000/wallets/{{walletId}}
