@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import crypto from 'crypto'
 import { HydratedDocument } from 'mongoose'
 
-export type AsssetDocument = HydratedDocument<Asset>
+export type AssetDocument = HydratedDocument<Asset>
 
 @Schema({ timestamps: true })
 export class Asset {
