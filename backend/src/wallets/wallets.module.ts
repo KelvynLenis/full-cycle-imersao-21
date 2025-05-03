@@ -3,8 +3,7 @@ import { Module } from '@nestjs/common'
 import { WalletsService } from './wallets.service'
 import { WalletsController } from './wallets.controller'
 import { MongooseModule } from '@nestjs/mongoose'
-import { AssetSchema } from 'src/assets/entities/asset.entity'
-import { Wallet } from './entities/wallet.entity'
+import { Wallet, WalletSchema } from './entities/wallet.entity'
 import { WalletAsset, WalletAssetSchema } from './entities/wallet-asset.entity'
 
 @Module({
@@ -12,10 +11,8 @@ import { WalletAsset, WalletAssetSchema } from './entities/wallet-asset.entity'
     MongooseModule.forFeature([
       {
         name: Wallet.name,
-        schema: AssetSchema,
+        schema: WalletSchema,
       },
-    ]),
-    MongooseModule.forFeature([
       {
         name: WalletAsset.name,
         schema: WalletAssetSchema,
@@ -24,5 +21,6 @@ import { WalletAsset, WalletAssetSchema } from './entities/wallet-asset.entity'
   ],
   controllers: [WalletsController],
   providers: [WalletsService],
+  exports: [WalletsService],
 })
 export class WalletsModule {}
