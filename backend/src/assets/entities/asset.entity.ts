@@ -9,6 +9,7 @@ export type AssetDocument = HydratedDocument<Asset>
 @Schema({
   timestamps: true,
   collectionOptions: { changeStreamPreAndPostImages: { enabled: true } },
+  optimisticConcurrency: true,
 })
 export class Asset {
   @Prop({ default: () => crypto.randomUUID() })

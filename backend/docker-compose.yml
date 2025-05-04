@@ -1,6 +1,18 @@
+include:
+  - ../kafka/docker-compose.yaml
+
 services:
+  nest:
+    build: .
+    volumes:
+      - .:/home/node/app
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
   mongo:
-    image: mongo:8.0.3
+    build: ./.docker/mongodb
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root

@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import mongoose, { HydratedDocument } from 'mongoose'
 import { Asset, AssetDocument } from 'src/assets/entities/asset.entity'
 import { Wallet, WalletDocument } from 'src/wallets/entities/wallet.entity'
+import { Trade } from './trade.entity'
 
 export type OrderDocument = HydratedDocument<Order>
 
@@ -20,7 +21,7 @@ export enum OrderStatus {
   FAILED = 'FAILED',
 }
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, optimisticConcurrency: true })
 export class Order {
   @Prop({ default: () => crypto.randomUUID() })
   _id: string
@@ -45,6 +46,9 @@ export class Order {
 
   @Prop({ type: String, ref: Asset.name })
   asset_id: AssetDocument | string
+
+  @Prop({ type: [mongoose.Schema.Types.String], ref: Trade.name })
+  trades: Trade[] | string[]
 
   createdAt!: Date
   updatedAt!: Date
